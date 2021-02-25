@@ -1,0 +1,9 @@
+@import "../../../styles/mixins.scss";
+$color-light-border: white;
+$color-dark-border: #999;
+
+.game-field__cell {
+  @include border($color-light-border, $color-dark-border);
+  width: 3rem;
+  height: 3rem;
+}

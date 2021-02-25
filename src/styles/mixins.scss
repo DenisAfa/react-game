@@ -1,0 +1,12 @@
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin border($color-top-left, $color-right-bottom) {
+  border-style: solid;
+  border-width: 0.4rem;
+  border-color: $color-top-left $color-right-bottom $color-right-bottom
+    $color-top-left;
+}

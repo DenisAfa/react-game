@@ -1,0 +1,10 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/constants.scss";
+$color-info-background: #c0c0c0;
+
+.game-info {
+  @include flex(space-between, center);
+  background: $color-info-background;
+  padding: 1rem 1.2rem;
+  @include border($color-dark-border, $color-light-border);
+}

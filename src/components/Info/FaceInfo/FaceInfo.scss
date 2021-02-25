@@ -1,0 +1,14 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/constants.scss";
+
+.game-info__smile {
+  @include border($color-light-border, $color-dark-border);
+  width: 5.2rem;
+  height: 5.36rem;
+  @include flex(center, center);
+  cursor: pointer;
+}
+
+.game-info__image {
+  width: 4rem;
+}

@@ -7,6 +7,9 @@
   height: 5.36rem;
   @include flex(center, center);
   cursor: pointer;
+  &:active {
+    @include border($color-dark-border, $color-light-border);
+  }
 }
 
 .game-info__image {

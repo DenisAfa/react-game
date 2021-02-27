@@ -1,16 +1,12 @@
 import React from "react";
 import "./App.scss";
-import Field from "./components/Field/Field";
-import Info from "./components/Info/Info";
+import AppContainer from "./components/AppContainer";
 
 const App: React.FC = () => {
   return (
-    <section className="game">
-      <div className="wrapper">
-        <Info />
-        <Field />
-      </div>
-    </section>
+    <main className="game">
+      <AppContainer />
+    </main>
   );
 };
 

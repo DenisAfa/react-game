@@ -1,28 +1,32 @@
 import React from "react";
 import "./Cell.scss";
 import { CellState, CellValue } from "../../../utils/cells/generateCells";
-import CellImage from "./CellImage/CellImage";
-import bomb from "../../../assets/images/bomb.png";
-import flag from "../../../assets/images/flag.png";
 
 interface CellProps {
   state: CellState;
   value: CellValue;
   column: number;
   row: number;
+  handleCellClick(row: number, col: number): void;
 }
-const Cell: React.FC<CellProps> = ({ value, state, row, column }) => {
+const Cell: React.FC<CellProps> = ({
+  value,
+  state,
+  row,
+  column,
+  handleCellClick,
+}) => {
   const renderContent = (): React.ReactNode => {
     switch (state) {
       case CellState.visible:
         if (value === CellValue.bomb) {
-          return <CellImage image={bomb} />;
+          return <span>🧨</span>;
         } else if (value === CellValue.none) {
           return null;
         }
         return value;
       case CellState.flagged:
-        return <CellImage image={flag} />;
+        return <span>🏴‍☠️</span>;
       default:
         return null;
     }
@@ -32,6 +36,7 @@ const Cell: React.FC<CellProps> = ({ value, state, row, column }) => {
       className={`game-field__cell cell ${
         state === CellState.visible ? "game-field__cell_visible" : ""
       } game-field__cell_value-${value}`}
+      onClick={() => handleCellClick(row, column)}
     >
       {renderContent()}
     </div>

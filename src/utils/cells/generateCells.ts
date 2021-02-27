@@ -24,14 +24,14 @@ export enum CellState {
   flagged,
 }
 
-export type Cell = {
+export type CellType = {
   id: number;
   value: CellValue;
   state: CellState;
 };
 
-const generateCells = (): Cell[][] => {
-  let cells: Cell[][] = [];
+const generateCells = (): CellType[][] => {
+  let cells: CellType[][] = [];
   let id = 1;
   for (let i = 0; i < MAX_ROWS; i += 1) {
     cells.push([]);

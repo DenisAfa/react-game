@@ -1,11 +1,23 @@
 import React from "react";
 import "./FaceInfo.scss";
-import smile from "../../../assets/images/smile_1.png";
 
-const FaceInfo: React.FC = (props) => {
+export enum Face {
+  smile = "🤠",
+  oops = "🥶",
+  lost = "☠️",
+  won = "😎",
+}
+
+interface FaceInfoProps {
+  face: Face;
+}
+
+const FaceInfo: React.FC<FaceInfoProps> = ({ face }) => {
   return (
     <div className="game-info__smile">
-      <img className="game-info__image" src={smile} alt="smile" />
+      <span className="game-info__image" role="img" aria-label="face">
+        {face}
+      </span>
     </div>
   );
 };

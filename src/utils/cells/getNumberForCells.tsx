@@ -1,10 +1,10 @@
-import { Cell, CellValue } from "./generateCells";
+import { CellType, CellValue } from "./generateCells";
 
 const getNumberForCells = (
-  cells: Cell[][],
+  cells: CellType[][],
   maxRows: number,
   maxColumns: number
-): Cell[][] => {
+): CellType[][] => {
   cells.forEach((row, rowIndex) => {
     row.forEach((cell, columnIndex) => {
       let currentCell = cell;
@@ -32,13 +32,13 @@ const getNumberForCells = (
 };
 
 const calculateNumberOfBombsForCell = (
-  cells: Cell[][],
+  cells: CellType[][],
   rowIndex: number,
   columnIndex: number,
   maxColumns: number,
   maxRows: number
 ): number => {
-  const bombsCells: (Cell | null)[] = [];
+  const bombsCells: (CellType | null)[] = [];
 
   rowIndex > 0 && columnIndex > 0
     ? bombsCells.push(cells[rowIndex - 1][columnIndex - 1])

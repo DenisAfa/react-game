@@ -1,16 +1,16 @@
-import { Cell, CellValue } from "./generateCells";
+import { CellType, CellValue } from "./generateCells";
 
 const addBombs = (
-  cells: Cell[][],
+  cells: CellType[][],
   maxRows: number,
   maxColumns: number,
   numberOfBombs: number
-): Cell[][] => {
+): CellType[][] => {
   let bombsPlaced: number = 0;
   while (bombsPlaced < numberOfBombs) {
     const randomRow: number = Math.floor(Math.random() * maxRows);
     const randomColumn: number = Math.floor(Math.random() * maxColumns);
-    const currentCell: Cell = cells[randomRow][randomColumn];
+    const currentCell: CellType = cells[randomRow][randomColumn];
     if (currentCell.value !== CellValue.bomb) {
       cells = cells.map((row, rowIndex) =>
         row.map((cell, columnIndex) => {

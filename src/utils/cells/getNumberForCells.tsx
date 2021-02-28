@@ -1,4 +1,5 @@
 import { CellType, CellValue } from "./generateCells";
+import getAdjacentCells from "./getAdjacentCells";
 
 const getNumberForCells = (
   cells: CellType[][],
@@ -38,37 +39,13 @@ const calculateNumberOfBombsForCell = (
   maxColumns: number,
   maxRows: number
 ): number => {
-  const bombsCells: (CellType | null)[] = [];
-
-  rowIndex > 0 && columnIndex > 0
-    ? bombsCells.push(cells[rowIndex - 1][columnIndex - 1])
-    : bombsCells.push(null);
-  rowIndex > 0
-    ? bombsCells.push(cells[rowIndex - 1][columnIndex])
-    : bombsCells.push(null);
-
-  rowIndex > 0 && columnIndex < maxColumns - 1
-    ? bombsCells.push(cells[rowIndex - 1][columnIndex + 1])
-    : bombsCells.push(null);
-  columnIndex > 0
-    ? bombsCells.push(cells[rowIndex][columnIndex - 1])
-    : bombsCells.push(null);
-
-  columnIndex < maxColumns - 1
-    ? bombsCells.push(cells[rowIndex][columnIndex + 1])
-    : bombsCells.push(null);
-
-  rowIndex < maxRows - 1 && columnIndex > 0
-    ? bombsCells.push(cells[rowIndex + 1][columnIndex - 1])
-    : bombsCells.push(null);
-
-  rowIndex < maxRows - 1
-    ? bombsCells.push(cells[rowIndex + 1][columnIndex])
-    : bombsCells.push(null);
-
-  rowIndex < maxRows - 1 && columnIndex < maxColumns - 1
-    ? bombsCells.push(cells[rowIndex + 1][columnIndex + 1])
-    : bombsCells.push(null);
+  const bombsCells: (CellType | null)[] = getAdjacentCells(
+    cells,
+    rowIndex,
+    columnIndex,
+    maxColumns,
+    maxRows
+  );
 
   let numberOfBombs = 0;
 

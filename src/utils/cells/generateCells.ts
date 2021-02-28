@@ -1,8 +1,8 @@
 import addBombs from "./addBombs";
 import getNumberForCells from "./getNumberForCells";
 
-const MAX_ROWS = 9;
-const MAX_COLUMNS = 9;
+export const MAX_ROWS = 9;
+export const MAX_COLUMNS = 9;
 const NUMBER_OF_BOMBS = 10;
 
 export enum CellValue {
@@ -28,6 +28,7 @@ export type CellType = {
   id: number;
   value: CellValue;
   state: CellState;
+  isRed?: boolean;
 };
 
 const generateCells = (): CellType[][] => {

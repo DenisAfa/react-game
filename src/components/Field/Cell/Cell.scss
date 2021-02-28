@@ -10,6 +10,7 @@ $color-value-5: maroon;
 $color-value-6: turquoise;
 $color-value-7: black;
 $color-value-8: gray;
+$color-background-active-bomb: red;
 
 .game-field__cell {
   @include flex(center, center);
@@ -48,5 +49,8 @@ $color-value-8: gray;
   }
   &_value-8 {
     color: $color-value-8;
+  }
+  &_red {
+    background: $color-background-active-bomb;
   }
 }

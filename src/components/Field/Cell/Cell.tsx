@@ -7,14 +7,18 @@ interface CellProps {
   value: CellValue;
   column: number;
   row: number;
-  handleCellClick(row: number, col: number): void;
+  isRed?: boolean;
+  handleCellClick(row: number, column: number): void;
+  handleCellContext(row: number, column: number): void;
 }
 const Cell: React.FC<CellProps> = ({
   value,
   state,
   row,
   column,
+  isRed,
   handleCellClick,
+  handleCellContext,
 }) => {
   const renderContent = (): React.ReactNode => {
     switch (state) {
@@ -35,12 +39,16 @@ const Cell: React.FC<CellProps> = ({
     <div
       className={`game-field__cell cell ${
         state === CellState.visible ? "game-field__cell_visible" : ""
-      } game-field__cell_value-${value}`}
+      } game-field__cell_value-${value} ${isRed ? "game-field__cell_red" : ""}`}
       onClick={() => handleCellClick(row, column)}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        handleCellContext(row, column);
+      }}
     >
       {renderContent()}
     </div>
   );
 };
 
-export default Cell;
+export default React.memo(Cell);

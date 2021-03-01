@@ -19,6 +19,7 @@ interface InfoProps {
   ): void;
   setHasLostCallback(hasLost: boolean): void;
   setHasWonCallback(hasLost: boolean): void;
+  setFaceCallback(face: Face): void;
 }
 
 const Info: React.FC<InfoProps> = ({
@@ -32,6 +33,7 @@ const Info: React.FC<InfoProps> = ({
   setBombCounterCallback,
   setHasLostCallback,
   setHasWonCallback,
+  setFaceCallback,
 }) => {
   useEffect(() => {
     if (isLive && time < 999) {
@@ -43,6 +45,7 @@ const Info: React.FC<InfoProps> = ({
       };
     }
   }, [isLive, time, setTimeCallback]);
+  console.log("Info");
   return (
     <div className="game-info">
       <NumberDisplay value={bombCounter} />
@@ -54,6 +57,7 @@ const Info: React.FC<InfoProps> = ({
         setBombCounterCallback={setBombCounterCallback}
         setHasLostCallback={setHasLostCallback}
         setHasWonCallback={setHasWonCallback}
+        setFaceCallback={setFaceCallback}
       />
       <NumberDisplay value={time} />
     </div>

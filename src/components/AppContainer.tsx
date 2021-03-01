@@ -14,49 +14,65 @@ const AppContainer: React.FC = () => {
   const [hasLost, setHasLost] = useState<boolean>(false);
   const [hasWon, setHasWon] = useState<boolean>(false);
 
-  const setFaceCallback = (faceType: Face): void => {
-    setFace(faceType);
-  };
+  const setFaceCallback = useCallback(
+    (faceType: Face): void => {
+      setFace(faceType);
+    },
+    [setFace]
+  );
 
-  const setTimeCallback = (
-    timeValue: number = time,
-    increaseValue: number = 0
-  ): void => {
-    setTime(timeValue + increaseValue);
-  };
+  const setTimeCallback = useCallback(
+    (timeValue: number = time, increaseValue: number = 0): void => {
+      setTime(timeValue + increaseValue);
+    },
+    [time]
+  );
 
-  const setIsLiveCallback = (isLiveValue: boolean): void => {
-    setIsLive(isLiveValue);
-  };
+  const setIsLiveCallback = useCallback(
+    (isLiveValue: boolean): void => {
+      setIsLive(isLiveValue);
+    },
+    [setIsLive]
+  );
 
-  const setCellsCallback = (newCells: CellType[][]) => {
-    setCells(newCells);
-  };
+  const setCellsCallback = useCallback(
+    (newCells: CellType[][]) => {
+      setCells(newCells);
+    },
+    [setCells]
+  );
 
-  const setBombCounterCallback = (
-    newBombCounter: number = bombCounter,
-    increaseValue: number = 0,
-    isAddition: boolean = false
-  ): void => {
-    isAddition
-      ? setBombCounter(newBombCounter + increaseValue)
-      : setBombCounter(newBombCounter - increaseValue);
-  };
+  const setBombCounterCallback = useCallback(
+    (
+      newBombCounter: number = bombCounter,
+      increaseValue: number = 0,
+      isAddition: boolean = false
+    ): void => {
+      isAddition
+        ? setBombCounter(newBombCounter + increaseValue)
+        : setBombCounter(newBombCounter - increaseValue);
+    },
+    [bombCounter]
+  );
 
-  const setHasLostCallback = (hasLost: boolean) => {
-    setHasLost(hasLost);
-  };
+  const setHasLostCallback = useCallback(
+    (hasLost: boolean) => {
+      setHasLost(hasLost);
+    },
+    [setHasLost]
+  );
 
-  const setHasWonCallback = (hasWon: boolean) => {
-    setHasWon(hasWon);
-  };
+  const setHasWonCallback = useCallback(
+    (hasWon: boolean) => {
+      setHasWon(hasWon);
+    },
+    [setHasWon]
+  );
 
   useEffect(() => {
     if (hasLost) {
       setIsLive(false);
       setFace(Face.lost);
-    } else {
-      setFace(Face.smile);
     }
   }, [hasLost]);
 
@@ -66,7 +82,6 @@ const AppContainer: React.FC = () => {
       setFace(Face.won);
     }
   }, [hasWon]);
-
   return (
     <div className="wrapper">
       <Info
@@ -80,6 +95,7 @@ const AppContainer: React.FC = () => {
         setBombCounterCallback={setBombCounterCallback}
         setHasLostCallback={setHasLostCallback}
         setHasWonCallback={setHasWonCallback}
+        setFaceCallback={setFaceCallback}
       />
       <Field
         cells={cells}

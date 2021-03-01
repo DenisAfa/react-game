@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import generateCells, { CellType } from "../../../utils/cells/generateCells";
 import "./FaceInfo.scss";
 
@@ -21,6 +21,7 @@ interface FaceInfoProps {
   ): void;
   setHasLostCallback(hasLost: boolean): void;
   setHasWonCallback(hasLost: boolean): void;
+  setFaceCallback(face: Face): void;
 }
 
 const FaceInfo: React.FC<FaceInfoProps> = ({
@@ -31,6 +32,7 @@ const FaceInfo: React.FC<FaceInfoProps> = ({
   setIsLiveCallback,
   setBombCounterCallback,
   setHasWonCallback,
+  setFaceCallback,
 }) => {
   const handleFaceClick = (): void => {
     setIsLiveCallback(false);
@@ -39,12 +41,12 @@ const FaceInfo: React.FC<FaceInfoProps> = ({
     setBombCounterCallback(10);
     setHasLostCallback(false);
     setHasWonCallback(false);
+    setFaceCallback(Face.smile);
   };
+  console.log("Face");
   return (
     <div className="game-info__smile" onClick={handleFaceClick}>
-      <span className="game-info__image" role="img" aria-label="face">
-        {face}
-      </span>
+      <span className="game-info__image">{face}</span>
     </div>
   );
 };

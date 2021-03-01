@@ -8,18 +8,8 @@ interface CellProps {
   column: number;
   row: number;
   isRed?: boolean;
-  handleCellClick(row: number, column: number): void;
-  handleCellContext(row: number, column: number): void;
 }
-const Cell: React.FC<CellProps> = ({
-  value,
-  state,
-  row,
-  column,
-  isRed,
-  handleCellClick,
-  handleCellContext,
-}) => {
+const Cell: React.FC<CellProps> = ({ value, state, row, column, isRed }) => {
   const renderContent = (): React.ReactNode => {
     switch (state) {
       case CellState.visible:
@@ -30,21 +20,23 @@ const Cell: React.FC<CellProps> = ({
         }
         return value;
       case CellState.flagged:
-        return <span>🏴‍☠️</span>;
+        return (
+          <span data-row={`${row}`} data-col={`${column}`}>
+            🏴‍☠️
+          </span>
+        );
       default:
         return null;
     }
   };
+  console.log("Cell");
   return (
     <div
+      data-row={`${row}`}
+      data-col={`${column}`}
       className={`game-field__cell cell ${
         state === CellState.visible ? "game-field__cell_visible" : ""
       } game-field__cell_value-${value} ${isRed ? "game-field__cell_red" : ""}`}
-      onClick={() => handleCellClick(row, column)}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        handleCellContext(row, column);
-      }}
     >
       {renderContent()}
     </div>

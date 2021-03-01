@@ -19,7 +19,7 @@ $color-background-active-bomb: red;
   height: 3rem;
   font-weight: bold;
   font-size: 1.6rem;
-  &:active {
+  &_active {
     @include border($color-dark-border, $color-light-border);
   }
   &_visible {

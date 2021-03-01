@@ -1,4 +1,4 @@
-import React from "react";
+import React, { BaseSyntheticEvent, useMemo } from "react";
 import {
   CellState,
   CellType,
@@ -38,7 +38,20 @@ const Field: React.FC<FieldProps> = ({
   setHasLostCallback,
   setHasWonCallback,
 }) => {
-  const handleMouseDown = (): void => {
+  const handleMouseDown = (e: BaseSyntheticEvent): void => {
+    const isClickOnCell = isNaN(Number(e.target.dataset.row));
+    if (isClickOnCell) {
+      return;
+    }
+    const row = Number(e.target.dataset.row);
+    const column = Number(e.target.dataset.col);
+    const currentCell = cells[row][column];
+    if (
+      currentCell.state === CellState.visible ||
+      currentCell.state === CellState.flagged
+    ) {
+      return;
+    }
     setFaceCallback(Face.oops);
   };
 
@@ -46,13 +59,27 @@ const Field: React.FC<FieldProps> = ({
     setFaceCallback(Face.smile);
   };
 
+  const showAllBombs = (): CellType[][] => {
+    const currentCells = cells.slice();
+    return currentCells.map((row) =>
+      row.map((cell) => {
+        if (cell.value === CellValue.bomb) {
+          return {
+            ...cell,
+            state: CellState.visible,
+          };
+        }
+        return cell;
+      })
+    );
+  };
+
   const handleCellClick = (row: number, column: number): void => {
     if (!isLive) {
       setIsLiveCallback(true);
     }
-    const currentCell = cells[row][column];
     let newCells = cells.slice();
-
+    const currentCell = cells[row][column];
     if (
       currentCell.state === CellState.flagged ||
       currentCell.state === CellState.visible
@@ -69,11 +96,9 @@ const Field: React.FC<FieldProps> = ({
         return;
       case CellValue.none:
         newCells = openMultipleCells(newCells, row, column);
-
         break;
       default:
         newCells[row][column].state = CellState.visible;
-        setCellsCallback(newCells);
     }
 
     let safeOpenCellsExists: boolean = false;
@@ -115,8 +140,7 @@ const Field: React.FC<FieldProps> = ({
     }
 
     let currentCell = cells[row][column];
-    const currentCells = cells.slice();
-
+    let currentCells = cells.slice();
     if (currentCell.state === CellState.visible) {
       return;
     } else if (currentCell.state === CellState.open) {
@@ -127,48 +151,58 @@ const Field: React.FC<FieldProps> = ({
       }
     } else if (currentCell.state === CellState.flagged) {
       currentCells[row][column].state = CellState.open;
+      setCellsCallback(currentCells);
       setBombCounterCallback(bombCounter, 1, true);
     }
   };
-  const showAllBombs = (): CellType[][] => {
-    const currentCells = cells.slice();
-    return currentCells.map((row) =>
-      row.map((cell) => {
-        if (cell.value === CellValue.bomb) {
-          return {
-            ...cell,
-            state: CellState.visible,
-          };
-        }
-        return cell;
-      })
-    );
+
+  const onClickFn = (e: BaseSyntheticEvent): void => {
+    const row = Number(e.target.dataset.row);
+    const column = Number(e.target.dataset.col);
+    if (isNaN(row) || isNaN(column)) {
+      return;
+    }
+    handleCellClick(row, column);
   };
 
-  const cellElements = cells.map((row, rowIndex) =>
-    row.map((cell, columnIndex) => (
-      <Cell
-        key={`${cell.id}`}
-        value={cell.value}
-        state={cell.state}
-        row={rowIndex}
-        column={columnIndex}
-        isRed={cell.isRed}
-        handleCellClick={handleCellClick}
-        handleCellContext={handleCellContext}
-      />
-    ))
-  );
+  const onContextMenuFn = (e: BaseSyntheticEvent): void => {
+    const row = Number(e.target.dataset.row);
+    const column = Number(e.target.dataset.col);
+    e.preventDefault();
+    if (isNaN(row) || isNaN(column)) {
+      return;
+    }
+    handleCellContext(row, column);
+  };
 
+  const cellElements = useMemo(
+    (): JSX.Element[][] =>
+      cells.map((row, rowIndex) =>
+        row.map((cell, columnIndex) => (
+          <Cell
+            key={cell.id}
+            value={cell.value}
+            state={cell.state}
+            row={rowIndex}
+            column={columnIndex}
+            isRed={cell.isRed}
+          />
+        ))
+      ),
+    [cells]
+  );
+  console.log("Field");
   return (
     <div
       className="game-field"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onClick={onClickFn}
+      onContextMenu={onContextMenuFn}
     >
       {cellElements}
     </div>
   );
 };
 
-export default Field;
+export default React.memo(Field);

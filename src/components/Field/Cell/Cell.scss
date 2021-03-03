@@ -1,0 +1,56 @@
+@import "../../../styles/mixins.scss";
+$color-light-border: white;
+$color-dark-border: #999;
+$color-visible-border: #7b7b7b;
+$color-value-1: blue;
+$color-value-2: green;
+$color-value-3: red;
+$color-value-4: purple;
+$color-value-5: maroon;
+$color-value-6: turquoise;
+$color-value-7: black;
+$color-value-8: gray;
+$color-background-active-bomb: red;
+
+.game-field__cell {
+  @include flex(center, center);
+  @include border($color-light-border, $color-dark-border);
+  width: 3rem;
+  height: 3rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  &_active {
+    @include border($color-dark-border, $color-light-border);
+  }
+  &_visible {
+    border-color: $color-visible-border;
+    border-width: 1px;
+  }
+  &_value-1 {
+    color: $color-value-1;
+  }
+  &_value-2 {
+    color: $color-value-2;
+  }
+  &_value-3 {
+    color: $color-value-3;
+  }
+  &_value-4 {
+    color: $color-value-4;
+  }
+  &_value-5 {
+    color: $color-value-5;
+  }
+  &_value-6 {
+    color: $color-value-6;
+  }
+  &_value-7 {
+    color: $color-value-7;
+  }
+  &_value-8 {
+    color: $color-value-8;
+  }
+  &_red {
+    background: $color-background-active-bomb;
+  }
+}

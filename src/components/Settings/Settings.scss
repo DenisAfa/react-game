@@ -3,10 +3,16 @@ $color-text: rgb(0, 0, 0);
 $color-background: #a6a6a6;
 $color-background-button: #898989;
 $color-arrow-after: #ffffff;
+$color-main-background: #c2c2c2;
+
+.game-header {
+  @include flex(center, center);
+  height: 9vh;
+  background: $color-main-background;
+}
 
 .settings {
-  width: 25%;
-  @include flex(space-between, center);
+  @include flex(center, center);
 }
 
 .levels {

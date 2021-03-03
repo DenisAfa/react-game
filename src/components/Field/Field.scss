@@ -10,6 +10,10 @@
   &_16x16 {
     grid-template-rows: repeat(16, 1fr);
     grid-template-columns: repeat(16, 1fr);
+    @media screen and (max-width: 768px) {
+      grid-template-rows: repeat(16, 2.8rem);
+      grid-template-columns: repeat(16, 2.8rem);
+    }
   }
   &_16x30 {
     grid-template-rows: repeat(16, 1fr);

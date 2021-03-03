@@ -1,7 +1,32 @@
 @import "../../styles/mixins.scss";
 $color-background: #c2c2c2;
+$color-text: black;
 
 .game-footer {
   height: 8vh;
   background: $color-background;
+}
+
+.info {
+  height: 100%;
+  @include flex(center, center);
+  flex-direction: column;
+}
+
+.info__creator {
+  text-decoration: none;
+  color: $color-text;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
+}
+
+.info__logo {
+  width: 3.5rem;
+  height: 2rem;
+}
+
+.info__year {
+  color: $color-text;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
 }

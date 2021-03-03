@@ -48,24 +48,26 @@ const Settings: React.FC<SettingsProps> = ({
 
   console.log("Settings");
   return (
-    <section className="settings">
-      <div className="settings__levels levels">
-        <select
-          className="levels__list"
-          name="levels"
-          defaultValue={"DEFAULT"}
-          onChange={setLevel}
-        >
-          <option value="DEFAULT" disabled>
-            Levels
-          </option>
-          <option value="0">Standard</option>
-          <option value="1">Expert</option>
-          <option value="2">Crazy</option>
-        </select>
-      </div>
-      <Switcher />
-    </section>
+    <header className="game-header">
+      <section className="settings">
+        <div className="settings__levels levels">
+          <select
+            className="levels__list"
+            name="levels"
+            defaultValue={"DEFAULT"}
+            onChange={setLevel}
+          >
+            <option value="DEFAULT" disabled>
+              Levels
+            </option>
+            <option value="0">Standard</option>
+            <option value="1">Expert</option>
+            <option value="2">Crazy</option>
+          </select>
+        </div>
+        <Switcher />
+      </section>
+    </header>
   );
 };
 

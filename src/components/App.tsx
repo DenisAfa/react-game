@@ -129,14 +129,12 @@ const App: React.FC = () => {
   }, [hasChangeLevel, maxRows, maxColumns, numbersOfBombs]);
   return (
     <div>
-      <header className="game-header">
-        <Settings
-          setHasChangeLevelCallback={setHasChangeLevelCallback}
-          setMaxRowsCallback={setMaxRowsCallback}
-          setMaxColumnsCallback={setMaxColumnsCallback}
-          setNumbersOfBombsCallback={setNumbersOfBombsCallback}
-        />
-      </header>
+      <Settings
+        setHasChangeLevelCallback={setHasChangeLevelCallback}
+        setMaxRowsCallback={setMaxRowsCallback}
+        setMaxColumnsCallback={setMaxColumnsCallback}
+        setNumbersOfBombsCallback={setNumbersOfBombsCallback}
+      />
       <div className="game-wrapper">
         <main className="game">
           <Info

@@ -8,6 +8,7 @@ $color-box-shadow: rgba(0, 0, 0, 0.2);
 .block {
   @include flex(center, center);
   flex-direction: column-reverse;
+  padding-left: 20px;
 }
 
 .block__name {

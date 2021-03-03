@@ -44,12 +44,11 @@ const FaceInfo: React.FC<FaceInfoProps> = ({
     setIsLiveCallback(false);
     setTimeCallback(0);
     setCellsCallback(generateCells(maxRows, maxColumns, numbersOfBombs));
-    setBombCounterCallback(10);
+    setBombCounterCallback(numbersOfBombs);
     setHasLostCallback(false);
     setHasWonCallback(false);
     setFaceCallback(Face.smile);
   };
-  console.log("Face");
   return (
     <div className="game-info__smile" onClick={handleFaceClick}>
       <span className="game-info__image">{face}</span>

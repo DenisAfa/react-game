@@ -29,7 +29,6 @@ const Cell: React.FC<CellProps> = ({ value, state, row, column, isRed }) => {
         return null;
     }
   };
-  console.log("Cell");
   return (
     <div
       data-row={`${row}`}

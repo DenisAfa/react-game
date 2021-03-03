@@ -1,6 +1,5 @@
 import React, { BaseSyntheticEvent } from "react";
 import "./Settings.scss";
-import Switcher from "./Switcher/Switcher";
 
 interface SettingsProps {
   setMaxRowsCallback(maxRows: number): void;
@@ -46,7 +45,6 @@ const Settings: React.FC<SettingsProps> = ({
     setHasChangeLevelCallback(true);
   };
 
-  console.log("Settings");
   return (
     <header className="game-header">
       <section className="settings">
@@ -65,7 +63,6 @@ const Settings: React.FC<SettingsProps> = ({
             <option value="2">Crazy</option>
           </select>
         </div>
-        <Switcher />
       </section>
     </header>
   );

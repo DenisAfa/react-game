@@ -51,7 +51,6 @@ const Info: React.FC<InfoProps> = ({
       };
     }
   }, [isLive, time, setTimeCallback]);
-  console.log("Info");
   return (
     <section className="game-info">
       <NumberDisplay value={bombCounter} />

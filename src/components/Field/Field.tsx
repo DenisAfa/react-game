@@ -13,6 +13,7 @@ interface FieldProps {
   cells: CellType[][];
   isLive: boolean;
   bombCounter: number;
+  hasLost: boolean;
   setFaceCallback(faceType: Face): void;
   setCellsCallback(newCells: CellType[][]): void;
   setIsLiveCallback(isLiveValue: boolean): void;
@@ -39,6 +40,7 @@ const Field: React.FC<FieldProps> = ({
   setBombCounterCallback,
   setHasLostCallback,
   setHasWonCallback,
+  hasLost,
 }) => {
   const handleMouseDown = (e: BaseSyntheticEvent): void => {
     const isClickOnCell = isNaN(Number(e.target.dataset.row));
@@ -77,7 +79,7 @@ const Field: React.FC<FieldProps> = ({
   };
 
   const handleCellClick = (row: number, column: number): void => {
-    if (!isLive) {
+    if (!isLive && !hasLost) {
       setIsLiveCallback(true);
     }
     let newCells = cells.slice();
@@ -86,6 +88,10 @@ const Field: React.FC<FieldProps> = ({
       currentCell.state === CellState.flagged ||
       currentCell.state === CellState.visible
     ) {
+      return;
+    }
+
+    if (hasLost) {
       return;
     }
 
@@ -143,8 +149,12 @@ const Field: React.FC<FieldProps> = ({
   };
 
   const handleCellContext = (row: number, column: number): void => {
-    if (!isLive) {
+    if (!isLive && !hasLost) {
       setIsLiveCallback(true);
+    }
+
+    if (hasLost) {
+      return;
     }
 
     let currentCell = cells[row][column];
@@ -199,7 +209,7 @@ const Field: React.FC<FieldProps> = ({
       ),
     [cells]
   );
-  console.log("Field");
+
   return (
     <div
       className={`game-field ${maxColumns === 16 ? `game-field_16x16` : ""} ${

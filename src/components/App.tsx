@@ -157,6 +157,7 @@ const App: React.FC = () => {
             cells={cells}
             isLive={isLive}
             bombCounter={bombCounter}
+            hasLost={hasLost}
             setFaceCallback={setFaceCallback}
             setIsLiveCallback={setIsLiveCallback}
             setCellsCallback={setCellsCallback}

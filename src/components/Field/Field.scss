@@ -7,4 +7,12 @@
   grid-template-columns: repeat(9, 1fr);
   margin-top: 1.6rem;
   @include border($color-dark-border, $color-light-border);
+  &_16x16 {
+    grid-template-rows: repeat(16, 1fr);
+    grid-template-columns: repeat(16, 1fr);
+  }
+  &_16x30 {
+    grid-template-rows: repeat(16, 1fr);
+    grid-template-columns: repeat(30, 1fr);
+  }
 }

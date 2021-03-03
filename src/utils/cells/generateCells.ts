@@ -1,10 +1,6 @@
 import addBombs from "./addBombs";
 import getNumberForCells from "./getNumberForCells";
 
-export const MAX_ROWS = 9;
-export const MAX_COLUMNS = 9;
-const NUMBER_OF_BOMBS = 10;
-
 export enum CellValue {
   none,
   one,
@@ -31,12 +27,16 @@ export type CellType = {
   isRed?: boolean;
 };
 
-const generateCells = (): CellType[][] => {
+const generateCells = (
+  maxRows: number,
+  maxColumns: number,
+  numbersOfBombs: number
+): CellType[][] => {
   let cells: CellType[][] = [];
   let id = 1;
-  for (let i = 0; i < MAX_ROWS; i += 1) {
+  for (let i = 0; i < maxRows; i += 1) {
     cells.push([]);
-    for (let j = 0; j < MAX_COLUMNS; j += 1) {
+    for (let j = 0; j < maxColumns; j += 1) {
       cells[i].push({
         id: id,
         value: CellValue.none,
@@ -45,8 +45,8 @@ const generateCells = (): CellType[][] => {
       id += 1;
     }
   }
-  cells = addBombs(cells, MAX_ROWS, MAX_COLUMNS, NUMBER_OF_BOMBS);
-  cells = getNumberForCells(cells, MAX_ROWS, MAX_COLUMNS);
+  cells = addBombs(cells, maxRows, maxColumns, numbersOfBombs);
+  cells = getNumberForCells(cells, maxRows, maxColumns);
 
   return cells;
 };

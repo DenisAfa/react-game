@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import generateCells, { CellType } from "../../../utils/cells/generateCells";
 import "./FaceInfo.scss";
 
@@ -22,6 +22,9 @@ interface FaceInfoProps {
   setHasLostCallback(hasLost: boolean): void;
   setHasWonCallback(hasLost: boolean): void;
   setFaceCallback(face: Face): void;
+  maxRows: number;
+  maxColumns: number;
+  numbersOfBombs: number;
 }
 
 const FaceInfo: React.FC<FaceInfoProps> = ({
@@ -33,11 +36,14 @@ const FaceInfo: React.FC<FaceInfoProps> = ({
   setBombCounterCallback,
   setHasWonCallback,
   setFaceCallback,
+  maxRows,
+  maxColumns,
+  numbersOfBombs,
 }) => {
   const handleFaceClick = (): void => {
     setIsLiveCallback(false);
     setTimeCallback(0);
-    setCellsCallback(generateCells());
+    setCellsCallback(generateCells(maxRows, maxColumns, numbersOfBombs));
     setBombCounterCallback(10);
     setHasLostCallback(false);
     setHasWonCallback(false);

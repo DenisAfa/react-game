@@ -3,8 +3,6 @@ import {
   CellState,
   CellType,
   CellValue,
-  MAX_COLUMNS,
-  MAX_ROWS,
 } from "../../utils/cells/generateCells";
 import openMultipleCells from "../../utils/cells/openMultipleCells";
 import { Face } from "../Info/FaceInfo/FaceInfo";
@@ -25,12 +23,16 @@ interface FieldProps {
   ): void;
   setHasLostCallback(hasLost: boolean): void;
   setHasWonCallback(hasWon: boolean): void;
+  maxRows: number;
+  maxColumns: number;
 }
 
 const Field: React.FC<FieldProps> = ({
   cells,
   isLive,
   bombCounter,
+  maxRows,
+  maxColumns,
   setFaceCallback,
   setCellsCallback,
   setIsLiveCallback,
@@ -95,15 +97,21 @@ const Field: React.FC<FieldProps> = ({
         setCellsCallback(newCells);
         return;
       case CellValue.none:
-        newCells = openMultipleCells(newCells, row, column);
+        newCells = openMultipleCells(
+          newCells,
+          row,
+          column,
+          maxRows,
+          maxColumns
+        );
         break;
       default:
         newCells[row][column].state = CellState.visible;
     }
 
     let safeOpenCellsExists: boolean = false;
-    for (let i = 0; i < MAX_ROWS; i += 1) {
-      for (let j = 0; j < MAX_COLUMNS; j += 1) {
+    for (let i = 0; i < maxRows; i += 1) {
+      for (let j = 0; j < maxColumns; j += 1) {
         const currentCell = newCells[i][j];
 
         if (
@@ -194,7 +202,9 @@ const Field: React.FC<FieldProps> = ({
   console.log("Field");
   return (
     <div
-      className="game-field"
+      className={`game-field ${maxColumns === 16 ? `game-field_16x16` : ""} ${
+        maxColumns === 30 ? `game-field_16x30` : ""
+      }`}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onClick={onClickFn}

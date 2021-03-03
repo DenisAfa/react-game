@@ -1,12 +1,22 @@
 @import "../styles/mixins.scss";
 
-
 $color-main-background: #c2c2c2;
 $color-light-border: white;
 $color-dark-border: #999;
 
-.wrapper {
+.game-wrapper {
+  @include flex(center, center);
+  height: 83vh;
+}
+
+.game {
   background: $color-main-background;
   padding: 1.6rem;
   @include border($color-light-border, $color-dark-border);
+}
+
+.game-header {
+  @include flex(center, center);
+  height: 9vh;
+  background: $color-main-background;
 }

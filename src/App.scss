@@ -1,6 +1,0 @@
-@import "./styles/mixins.scss";
-
-.game {
-  @include flex(center, center);
-  height: 100vh;
-}

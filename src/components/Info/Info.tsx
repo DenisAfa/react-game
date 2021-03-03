@@ -20,6 +20,9 @@ interface InfoProps {
   setHasLostCallback(hasLost: boolean): void;
   setHasWonCallback(hasLost: boolean): void;
   setFaceCallback(face: Face): void;
+  maxRows: number;
+  maxColumns: number;
+  numbersOfBombs: number;
 }
 
 const Info: React.FC<InfoProps> = ({
@@ -27,6 +30,9 @@ const Info: React.FC<InfoProps> = ({
   time,
   isLive,
   bombCounter,
+  maxRows,
+  maxColumns,
+  numbersOfBombs,
   setTimeCallback,
   setCellsCallback,
   setIsLiveCallback,
@@ -47,7 +53,7 @@ const Info: React.FC<InfoProps> = ({
   }, [isLive, time, setTimeCallback]);
   console.log("Info");
   return (
-    <div className="game-info">
+    <section className="game-info">
       <NumberDisplay value={bombCounter} />
       <FaceInfo
         face={face}
@@ -58,9 +64,12 @@ const Info: React.FC<InfoProps> = ({
         setHasLostCallback={setHasLostCallback}
         setHasWonCallback={setHasWonCallback}
         setFaceCallback={setFaceCallback}
+        maxRows={maxRows}
+        maxColumns={maxColumns}
+        numbersOfBombs={numbersOfBombs}
       />
       <NumberDisplay value={time} />
-    </div>
+    </section>
   );
 };
 
